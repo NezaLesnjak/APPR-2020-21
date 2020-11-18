@@ -19,12 +19,12 @@ Glavni vir podatkov bo [SURS](https://pxweb.stat.si/SiStat/sl/Podrocja/Index/139
 nekaj pa jih bom pridobila s pomočjo [Wikipedije](https://www.wikipedia.org/) (HTML).
 
 ### Tabele
-* Tabela 1: Delovno aktivno prebivalstvo gledena izobrazbo in spol:
-    leto, spol, izobrazba, delovno aktivni
-* Tabela 2: Delovno aktivno prebivalstvo glede na poklicno skupino in spol:
-    leto, spol, poklicna skupina, delovno aktivni
-* Tabela 3: Delovno aktivno prebivalstvo glede na statistično regijo:
-    leto, statistična regija, delovno aktivni
+* Tabela 1: Delovno aktivno prebivalstvo gledena izobrazbo in spol  
+    (leto, spol, izobrazba, delovno aktivni)
+* Tabela 2: Delovno aktivno prebivalstvo glede na poklicno skupino in spol  
+    (leto, spol, poklicna skupina, delovno aktivni)
+* Tabela 3: Delovno aktivno prebivalstvo glede na statistično regijo  
+    (leto, statistična regija, delovno aktivni)
     
 ### Plan dela
 Analizirati želim, kako se skozi leta spreminja število delovno aktivnih glede na njihovo izobrazbo ali poklicno skupino. 
