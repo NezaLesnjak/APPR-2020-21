@@ -1,6 +1,6 @@
 ---
-title: "Poročilo pri predmetu Analiza podatkov s programom R"
-author: "Študent FMF"
+title: "Analiza delovno aktivnega prebivalstva Slovenije"
+author: "Neža Lesnjak"
 output:
   html_document: default
   pdf_document:
@@ -24,9 +24,10 @@ source("lib/rstudio.r", encoding="UTF-8")
 
 # Izbira teme
 
-Za vzorec bomo prikazali nekaj podatkov o slovenskih občinah.
+V projektu bom analizirala delovno aktivno prebivalstvo Slovenije.
+Aktivno prebivalstvo se namreč deli na dve skupini: registrirane brezposelne osebe in delovno aktivne.
 
-![](slike/grb.png)
+Analizirati želim, kako se skozi leta spreminja število delovno aktivnih glede na njihovo izobrazbo ali poklicno skupino, v katero spadajo. Prav tako me bo zanimalo, kolikšen del prebivalstva statističnih regij predstavljajo delovno aktivni.
 
 ***
 
@@ -36,32 +37,68 @@ Za vzorec bomo prikazali nekaj podatkov o slovenskih občinah.
 source("uvoz/uvoz.r", encoding="UTF-8")
 ```
 
-Uvozili smo podatke o občinah v obliki CSV s statističnega urada ter v obliki HTML
-z Wikipedije. Podatke imamo v dveh razpredelnicah v obliki *tidy data*.
+Uvozila smo podatke o številu delovno aktivnih glede na izobrazbo, delovno skupino oziroma statistično regijo - v obliki CSV s statističnega urada ter podatke o površini regij v obliki HTML
+z Wikipedije. 
 
-1. `druzine` - podatki o družinah za vsako občino
-  - `obcina` - spremenljivka: ime občine (neurejen faktor),
-  - `velikost.druzine` - spremenljivka: število otrok v družini (število: 1, 2, 3 ali 4, kjer zadnja vrednost pomeni 4 ali več),
-  - `stevilo.druzin` - meritev: število družin z ustreznim številom otrok v ustrezni občini (število).
+Glavne poklicne skupine so:  
+  - zakonodajalci, visoki uradniki in menedžerji,  
+  - strokovnjaki,  
+  - tehniki in drugi strokovni sodelavci,  
+  - uradniki,  
+  - poklici za storitve in prodajalci,  
+  - kmetovalci, gozdarji, ribiči in lovci,  
+  - poklici za neindustrijski način dela,  
+  - upravljalci strojev in naprav, industrijski izdelovalci in sestavljalci,  
+  - poklici za preprosta dela in  
+  - vojaški poklici.
 
-2. `obcine` - podatki o občinah
-  - `obcina` - spremenljivka: ime občine (neurejen faktor),
-  - `povrsina` - meritev: površina občine v km$^2$ (število),
-  - `prebivalci` - meritev: prebivalstvo občine (število),
-  - `gostota` - meritev: število prebivalcev na km$^2$ (število),
-  - `naselja` - meritev: število naselij v občini (število),
-  - `ustanovitev` - meritev: leto ustanovitve občine (število),
-  - `pokrajina` - meritev: pokrajina, ki ji občina pripada (neurejen faktor),
-  - `regija` - meritev: regija, ki ji občina pripada (neurejen faktor),
-  - `odcepitev` - meritev: podatki o občinah, od katerih se je občina odcepila (besedilo).
+Ravni izobrazbe, uporabljene v spodnji tabeli:  
+  - brez izobrazbe ali nepopolna osnovnošolska,  
+  - osnovnošolska,  
+  - nižja ali srednja poklicna,  
+  - srednja strokovna, splošna,  
+  - višješolska, visokošolska.  
 
-**Opomba**: da bi razpredelnica `obcine` res bila v obliki *tidy data*, bi morali odstraniti stolpec `gostota` (saj je izpeljan iz stolpcev `povrsina` in `prebivalci`), podatke o pokrajinah pa bi morali premakniti v drugo razpredelnico, saj nekatere občine pripadajo dvema pokrajinama. Podobno bi morali narediti tudi s stolpcem `odcepitev`.
+Podatke o številu delovno aktvinih imamo v treh razpredelnicah v obliki *tidy data*.
 
-Spodnji graf prikazuje porazdelitev števila naselij v občinah.
+1. `delovno aktivni po izobrazbi in spolu` - podatki za leta od 2008 do 2019
+  - `spol` - spremenljivka: spol oseb (besedilo: moški ali ženske),
+  - `izobrazba` - spremenljivka: izobrazba glede na končano stopjno izobraževanja  (besedilo: ravni izobrazbe - zgoraj),
+  - `leto` - spremenljivka: leto, na katero se nanašajo podatki (število od 2008 do 2019),
+  - `število` - meritev: število delovno aktivnih v 1000 v določenem letu (število).
 
-```{r histogram, fig.align='center', fig.cap='Histogram števila naselij v občinah'}
-ggplot(obcine, aes(x=naselja)) + geom_histogram() +
-  ggtitle("Pogostost števila naselij") + xlab("Število naselij") + ylab("Število občin")
+2. `delovno aktivni po poklicni skupini in spolu` - podatki za leta od 2008 do 2019
+  - `spol` - spremenljivka: spol oseb (besedilo: moški ali ženske),
+  - `poklicna skupina` - spremenljivka: ena izmed desetih glavnih poklicnih skupin (besedilo: poklicne skupine - zgoraj),
+  - `leto` - spremenljivka: leto, na katero se nanašajo podatki (število od 2008 do 2019),
+  - `število` - meritev: število delovno aktivnih v 1000 v določenem letu (število).
+
+3. `delovno aktivni po statističnih regijah` - podatki za leta od 2008 do 2019
+  - `regija` - spremenljivka: ena izmed dvanajstih statističnih regij (besedilo),
+  - `leto` - spremenljivka: leto, na katero se nanašajo podatki (število od 2008 do 2019),
+  - `število` - meritev: število delovno aktivnih v določenem letu (število).
+
+Poleg treh tabel s podatki o delovno aktivnih pa imamo tudi dve tabeli s podatki o statističnih regijah.
+
+1. `površina regij` - podatki o velikosti statističnih regij
+  - `regija` - spremenljivka: ena izmed dvanajstih statističnih regij (besedilo),
+  - `površina` - meritev: vrlikost regije v km^2^.
+  
+2. `prebivalstvo regij` - podatki o številu prebivalcev po regijah za leta 2008 do 2019
+  - `regija` - spremenljivka: ena izmed dvanajstih statističnih regij (besedilo),
+  - `leto` - spremenljivka: leto, na katero se nanašajo podatki (število od 2008 do 2019),
+  - `število` - meritev: število prebivalcev regije v določenem letu (število).
+
+Spodnja grafa prikazujeta število delovno aktivnih moških oziroma žensk glede na njihovo stopnjo izobrazbe.
+
+```{r izobrazba moški, fig.align='center', fig.cap='Delovno aktivni moški glede na izobrazbo'}
+ggplot(filter(tabela_po_izobrazbi, spol == 'Moški'), aes(x=leto, y=število, col=izobrazba)) + geom_point() +
+  ggtitle("Delovno aktivni moški glede na izobrazbo") + ylab("Število v 1000")
+```
+
+```{r izobrazba ženske, fig.align='center', fig.cap='Delovno aktivne ženske glede na izobrazbo'}
+ggplot(filter(tabela_po_izobrazbi, spol == 'Ženske'), aes(x=leto, y=število, col=izobrazba)) + geom_point() +
+  ggtitle("Delovno aktivne ženske glede na izobrazbo") + ylab("Število v 1000")
 ```
 
 ***
