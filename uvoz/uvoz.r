@@ -7,8 +7,8 @@ uvozi.povrsina_regij <- function() {
   stran <- html_session(link) %>% read_html()
   tabela <- stran %>% html_nodes(xpath="//table[@class='wikitable']") %>%
     .[[1]] %>% html_table(dec="")
-  colnames(tabela) <- c("število", "regija", "prebivalci_2018", "površina")
-  for (col in c("prebivalci_2018", "površina")) {
+  colnames(tabela) <- c("stevilo", "regija", "prebivalci_2018", "povrsina")
+  for (col in c("prebivalci_2018", "povrsina")) {
     if (is.character(tabela[[col]])) {
       tabela[[col]] <- parse_number(tabela[[col]], na="-", locale=sl)
     }
@@ -32,28 +32,28 @@ uvozi.povrsina_regij <- function() {
 uvozi.izobrazba <- function() {
   po_izobrazbi <- read_csv2("podatki/po_stopnjah_dosezene_izobrazbe_in_spolu.csv", skip=2,
                             locale=locale(encoding="Windows-1250"))
-  colnames(po_izobrazbi) <- c("država", "spol", "izobrazba", 2008:2019)
+  colnames(po_izobrazbi) <- c("drzava", "spol", "izobrazba", 2008:2019)
   for (col in c(4:15)) {
     if (is.character(po_izobrazbi[[col]])) {
       po_izobrazbi[[col]] <- parse_number(po_izobrazbi[[col]], na="-", locale=sl)
     }
   }  
   po_izobrazbi <- po_izobrazbi[ -c(1)] %>%
-    pivot_longer(!c('spol', 'izobrazba'), names_to = 'leto', values_to = "število")
+    pivot_longer(!c('spol', 'izobrazba'), names_to = 'leto', values_to = "stevilo")
   return(po_izobrazbi)
 }
 
 uvozi.poklicna_skupina <- function() {
   po_poklicni_skupini <- read_csv2("podatki/po_poklicnih_skupinah_in_spolu.csv", skip=2,
                             locale=locale(encoding="Windows-1250"), na = c("N", "NA"))
-  colnames(po_poklicni_skupini) <- c("država", "spol", "poklicna_skupina", 2008:2019)
+  colnames(po_poklicni_skupini) <- c("drzava", "spol", "poklicna_skupina", 2008:2019)
   for (col in c(4:15)) {
     if (is.character(po_poklicni_skupini[[col]])) {
       po_poklicni_skupini[[col]] <- parse_number(po_poklicni_skupini[[col]], na="-", locale=sl)
     }
   }
   po_poklicni_skupini <- po_poklicni_skupini[ -c(1)] %>%
-    pivot_longer(!c('spol', 'poklicna_skupina'), names_to = 'leto', values_to = "število")
+    pivot_longer(!c('spol', 'poklicna_skupina'), names_to = 'leto', values_to = "stevilo")
   return(po_poklicni_skupini)
 }
 
@@ -67,7 +67,7 @@ uvozi.regije <- function() {
     }
   }
   po_statisticni_regiji <- po_statisticni_regiji[ -c(2:5)] %>% 
-    pivot_longer(!regija, names_to = "leto", values_to = "število")
+    pivot_longer(!regija, names_to = "leto", values_to = "stevilo")
   return(po_statisticni_regiji)
 }
 

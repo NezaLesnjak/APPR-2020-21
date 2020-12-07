@@ -65,39 +65,39 @@ Podatke o številu delovno aktvinih imamo v treh razpredelnicah v obliki *tidy d
   - `spol` - spremenljivka: spol oseb (besedilo: moški ali ženske),
   - `izobrazba` - spremenljivka: izobrazba glede na končano stopjno izobraževanja  (besedilo: ravni izobrazbe - zgoraj),
   - `leto` - spremenljivka: leto, na katero se nanašajo podatki (število od 2008 do 2019),
-  - `število` - meritev: število delovno aktivnih v 1000 v določenem letu (število).
+  - `stevilo` - meritev: število delovno aktivnih v 1000 v določenem letu (število).
 
 2. `delovno aktivni po poklicni skupini in spolu` - podatki za leta od 2008 do 2019
   - `spol` - spremenljivka: spol oseb (besedilo: moški ali ženske),
   - `poklicna skupina` - spremenljivka: ena izmed desetih glavnih poklicnih skupin (besedilo: poklicne skupine - zgoraj),
   - `leto` - spremenljivka: leto, na katero se nanašajo podatki (število od 2008 do 2019),
-  - `število` - meritev: število delovno aktivnih v 1000 v določenem letu (število).
+  - `stevilo` - meritev: število delovno aktivnih v 1000 v določenem letu (število).
 
 3. `delovno aktivni po statističnih regijah` - podatki za leta od 2008 do 2019
   - `regija` - spremenljivka: ena izmed dvanajstih statističnih regij (besedilo),
   - `leto` - spremenljivka: leto, na katero se nanašajo podatki (število od 2008 do 2019),
-  - `število` - meritev: število delovno aktivnih v določenem letu (število).
+  - `stevilo` - meritev: število delovno aktivnih v določenem letu (število).
 
 Poleg treh tabel s podatki o delovno aktivnih pa imamo tudi dve tabeli s podatki o statističnih regijah.
 
 1. `površina regij` - podatki o velikosti statističnih regij
   - `regija` - spremenljivka: ena izmed dvanajstih statističnih regij (besedilo),
-  - `površina` - meritev: vrlikost regije v km^2^.
+  - `povrsina` - meritev: vrlikost regije v km^2^.
   
 2. `prebivalstvo regij` - podatki o številu prebivalcev po regijah za leta 2008 do 2019
   - `regija` - spremenljivka: ena izmed dvanajstih statističnih regij (besedilo),
   - `leto` - spremenljivka: leto, na katero se nanašajo podatki (število od 2008 do 2019),
-  - `število` - meritev: število prebivalcev regije v določenem letu (število).
+  - `stevilo` - meritev: število prebivalcev regije v določenem letu (število).
 
 Spodnja grafa prikazujeta število delovno aktivnih moških oziroma žensk glede na njihovo stopnjo izobrazbe.
 
 ```{r izobrazba moški, fig.align='center', fig.cap='Delovno aktivni moški glede na izobrazbo'}
-ggplot(filter(tabela_po_izobrazbi, spol == 'Moški'), aes(x=leto, y=število, col=izobrazba)) + geom_point() +
+ggplot(filter(tabela_po_izobrazbi, spol == 'Moški'), aes(x=leto, y=stevilo, col=izobrazba)) + geom_point() +
   ggtitle("Delovno aktivni moški glede na izobrazbo") + ylab("Število v 1000")
 ```
 
 ```{r izobrazba ženske, fig.align='center', fig.cap='Delovno aktivne ženske glede na izobrazbo'}
-ggplot(filter(tabela_po_izobrazbi, spol == 'Ženske'), aes(x=leto, y=število, col=izobrazba)) + geom_point() +
+ggplot(filter(tabela_po_izobrazbi, spol == 'Ženske'), aes(x=leto, y=stevilo, col=izobrazba)) + geom_point() +
   ggtitle("Delovno aktivne ženske glede na izobrazbo") + ylab("Število v 1000")
 ```
 
