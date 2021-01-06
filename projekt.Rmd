@@ -12,7 +12,6 @@ runtime: shiny
 
 ```{r setup, echo=FALSE, results='hide', message=FALSE, warning=FALSE}
 knitr::opts_chunk$set(echo=FALSE, message=FALSE, warning=FALSE)
-
 # Uvoz vseh potrebnih knjižnic
 source("lib/libraries.r", encoding="UTF-8")
 ```
@@ -91,16 +90,6 @@ Poleg treh tabel s podatki o delovno aktivnih pa imamo tudi dve tabeli s podatki
 
 Spodnja grafa prikazujeta število delovno aktivnih moških oziroma žensk glede na njihovo stopnjo izobrazbe.
 
-```{r izobrazba moški, fig.align='center', fig.cap='Delovno aktivni moški glede na izobrazbo'}
-ggplot(filter(tabela_po_izobrazbi, spol == 'Moški'), aes(x=leto, y=stevilo, col=izobrazba)) + geom_point() +
-  ggtitle("Delovno aktivni moški glede na izobrazbo") + ylab("Število v 1000")
-```
-
-```{r izobrazba ženske, fig.align='center', fig.cap='Delovno aktivne ženske glede na izobrazbo'}
-ggplot(filter(tabela_po_izobrazbi, spol == 'Ženske'), aes(x=leto, y=stevilo, col=izobrazba)) + geom_point() +
-  ggtitle("Delovno aktivne ženske glede na izobrazbo") + ylab("Število v 1000")
-```
-
 ***
 
 # Analiza in vizualizacija podatkov
@@ -109,13 +98,70 @@ ggplot(filter(tabela_po_izobrazbi, spol == 'Ženske'), aes(x=leto, y=stevilo, co
 source("vizualizacija/vizualizacija.r", encoding="UTF-8")
 ```
 
-Spodnji zemljevid prikazuje povprečno velikost družine za vsako občino.
-
-```{r zemljevid, fig.align='center', fig.cap='Zemljevid povprečnega števila otrok v družini'}
-tm_shape(merge(zemljevid, povprecja, by.x="OB_UIME", by.y="obcina")) +
-  tm_polygons("povprecje", title="Povprečje") +
-  tm_layout(title="Povprečno število otrok v družini")
+```{r izobrazba moški, fig.align='center', fig.cap='Delovno aktivni moški glede na izobrazbo'}
+graf_izobrazba.moski
 ```
+
+Prvi graf prikazuje število delovno aktivnih moških glede na njihovo izobrazbo od leta 2008 do 2019.
+Ravni izobrazbe so razdeljene v pet glavnih skupin.
+Kot sem si upala pričakovati je najmanjše število tistih, ki so brez izobrazbe oziroma imajo nepopolno osnovnošolsko izobrazbo. V zadnjih letih je število slednjih padlo na 1000.
+Nasprotje temu pa so moški s srednjo strokovno ali splošno izobrazbo - teh je namreč od leta 2009 dalje po številu največ.
+V preteklem letu jih je bilo kar 195 000. 
+Skoraj skozi celotno časovno obdobje, za katerega imamo podatke, pada število delovno aktivnih, ki spadajo v prve tri skupine po stopnjah izobrazbe. Torej pada število delovno aktivnih moških brez izobrazbe, z osnovnošolsko izobrazbo in nižjo ali srednjo poklicno izobrazbo.
+Poleg velikega padca števila tistih s srednje poklicno izobrazbo (iz kar 183 000 na 138 000), se je obratna sprememba zgodila pri višje in visokošolsko izobraženih - število je iz 103 000 narastlo kar na 155 000.
+
+```{r izobrazba ženske, fig.align='center', fig.cap='Delovno aktivne ženske glede na izobrazbo'}
+graf_izobrazba.zenske
+```
+
+Zgornji graf prikazuje podobne podatke kot prvi, le da gre v tem primeru za delovno aktivne ženske.
+Tudi za žensko populacijo velja, da je skozi predstavljeno časovno obdobje padlo število tistih brez izobrazbe, z nepopolno ali popolno osnovnošolsko izobrazbo.
+Zanimivo pa je, da se podatki v naslednjih treh skupinah očitno razlikujejo od prejšnjih podatkov, vezanih na moške.
+Razlika med spoloma je očitna predvsem pri nižji ali srednji poklicni izobrazbi. Medtem ko se ta pri moških giblje med veliko višjimi števili, pri ženskah zavzema vrednosti med 84 000 in 61 000.
+Dve glavni skupini, ki predstavljata tiste z najvišjo ravnijo izobrazbe predstavljata tudi največje število delovno aktivnih žensk.  
+Med leti 2008 in 2011 je največje število delovno aktivnih žensk s srednjo strokovno ali splošno izobrazbo, od 2012 dalje pa največje vrednosti zavzema število višje in visokoizobraženih - slednje je naraščalo skozi vsa leta (iz 135 000 na kar 203 000 delovno aktivnih žensk).
+
+```{r poklicna skupina, fig.align='center', fig.cap='Delovno aktivni v letu 2019 glede na poklicno skupino in spol'}
+graf_poklicna_skupina.2019
+```
+
+Tretji graf prikazuje število delovno aktivnih v letu 2019, glede na njihovo poklicno skupino ter spol.
+Če pri komentarju izpustim tiste, katerih poklic je neznan oziroma ne spada v nobeno od naštetih poklicnih skupin (skupno število takih je 10 000),
+potem je tako moških kot žensk najmanj v vojaških poklicih (samo 5000, od tega le 1000 žensk).  
+Največ žensk je delovno aktivnih v poklicni skupini strokovnjakov (135 000), največ moških pa v poklicih za neindustrijski način dela (124 000). Zanimivo je, da je v slednji skupini razlika med spoloma tudi največja.  
+Skupine poklicev, kjer je razlika med spoloma v številu manjša od 15 000 so:  
+- vojaški poklici,  
+- uradniki,  
+- tehniki in drugi strokovni sodelavci in  
+- kmetovalci, gozdarji, ribiči.
+
+```{r tehniki, fig.align='center', fig.cap='Delovno aktivni tehniki glede na spol'}
+graf_tehniki
+```
+
+Ko sem analizirala podatke o delovno aktivnih glede na poklicno skupino, se mi je zdela najbolj zanimiva skupina tehnikov in drugih strokovnih sodelavcev. V letih med 2008 in 2019 so se namreč števila aktivnih v tej skupini zanimivo spreminjala.  
+V letih do 2011 je veljalo, da je v tej poklicni skupini večje število žensk kot moških, po tem letu pa velja ravno obratno.
+Zanimivo je tudi, da je po letu 2010 močno padlo število delovno aktivnih v tej skupini - pri obeh spolih. Zanimivo bi bilo vedeti, kolikšen vpliv je imela na ta padec kriza, ki se je dogajala v tistem obdobju.
+Padanje števila se je v naslednjih nekaj letih še nadaljevalo in leta 2015 je bilo v tej skupini skupaj zaposlenih le 109 000 ljudi (za primerjavo: v letu 2010 jih je bilo 154 000). 
+Po letu 2015 je število sicer zopet narastlo, a ne do te mere, da bi ga lahko enačili s številom pred krizo. 
+
+
+```{r povrsina, fig.align='center', fig.cap='Zemljevid števila delovno aktivnih na kvadratni kilometer'}
+narisi_glede_na_povrsino
+```
+
+Zemljevid prikazuje število delovno aktivnih na kvadratni kilometer regije v letu 2019.
+Osrednjeslovenska regija ima daleč največje število - kar 105 delovno aktivnih na kvadratni kilometer.
+S skoraj 60-imi ji sledi šele podravska statistična regija.
+Regija z najredkejšim številom delovno aktivnih je notranjsko-kraška (s 16 delovno aktivnimi osebami na kvadratni kilometer).
+
+```{r prebivalci, fig.align='center', fig.cap='Zemljevid deleža delovno aktivnih glede na število vseh prebivalcev'}
+narisi_glede_na_prebivalce
+```
+
+Zgornji zemljevid pa prikazuje, kolikšen delež vseh prebivalcev regije predstavljajo delovno aktivni v letu 2019.
+Po najmanjšem deležu izstopajo statistične regije na (skrajnem) severovzhodu države (med 36% in 41%). Ravno obratno pa velja za gorenjsko, notranjsko-kraško, osrednjeslovensko in jugovzhodno Slovenijo - te regije imajo delež zelo blizu 45%.
+
 
 ***
 
