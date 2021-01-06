@@ -18,13 +18,15 @@ uvozi.povrsina_regij <- function() {
   tabela$regija[tabela$regija == "Koroška regija"] <- "Koroška"
   tabela$regija[tabela$regija == "Savinjska regija"] <- "Savinjska"
   tabela$regija[tabela$regija == "Zasavska regija"] <- "Zasavska"
-  tabela$regija[tabela$regija == "Posavska regija"] <- "Posavska"
+#  tabela$regija[tabela$regija == "Posavska regija"] <- "Posavska"
   tabela$regija[tabela$regija == "Jugovzhodna regija"] <- "Jugovzhodna"
   tabela$regija[tabela$regija == "Osrednjeslovenska regija"] <- "Osrednjeslovenska"
   tabela$regija[tabela$regija == "Gorenjska regija"] <- "Gorenjska"
-  tabela$regija[tabela$regija == "Primorsko-notranjska regija"] <- "Primorsko-notranjska"
+#  tabela$regija[tabela$regija == "Primorsko-notranjska regija"] <- "Primorsko-notranjska"
   tabela$regija[tabela$regija == "Goriška regija"] <- "Goriška"
   tabela$regija[tabela$regija == "Obalno-kraška regija"] <- "Obalno-kraška"
+  tabela$regija[tabela$regija == "Primorsko-notranjska regija"] <- "Notranjsko-kraška"
+  tabela$regija[tabela$regija == "Posavska regija"] <- "Spodnjeposavska"
   tabela <- tabela[c(2, 4)]
   return(tabela)
 }
@@ -68,6 +70,8 @@ uvozi.regije <- function() {
   }
   po_statisticni_regiji <- po_statisticni_regiji[ -c(2:5)] %>% 
     pivot_longer(!regija, names_to = "leto", values_to = "stevilo")
+  po_statisticni_regiji$regija[po_statisticni_regiji$regija == "Primorsko-notranjska"] <- "Notranjsko-kraška"
+  po_statisticni_regiji$regija[po_statisticni_regiji$regija == "Posavska"] <- "Spodnjeposavska"  
   return(po_statisticni_regiji)
 }
 
@@ -82,6 +86,8 @@ uvozi.prebivalstvo_regij <- function() {
   }
   prebivalstvo_regij <- prebivalstvo_regij[ -c(1, 3:20, 33)] %>% 
     pivot_longer(!regija, names_to = "leto", values_to = "prebivalstvo")
+  prebivalstvo_regij$regija[prebivalstvo_regij$regija == "Primorsko-notranjska"] <- "Notranjsko-kraška"
+  prebivalstvo_regij$regija[prebivalstvo_regij$regija == "Posavska"] <- "Spodnjeposavska" 
   return(prebivalstvo_regij)
 }
 
