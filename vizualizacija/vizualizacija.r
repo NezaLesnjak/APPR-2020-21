@@ -13,15 +13,16 @@ graf_izobrazba.zenske <- ggplot(filter(tabela_po_izobrazbi, spol == 'Ženske'),
 
 # Graf delovno aktivnih v letu 2019 glede na poklicno skupino in spol
 graf_poklicna_skupina.2019 <- ggplot(filter(tabela_po_poklicni_skupini, leto == 2019), aes(x=stevilo, y=poklicna_skupina, fill=spol)) + 
-  geom_bar(stat='identity', position='dodge') + theme_minimal() + scale_fill_discrete(name='Spol') + 
-  labs(title="Delovno aktivni v 2019", x="Število v 1000", y = "Poklicna skupina")
+  geom_bar(stat='identity', position='dodge') + theme_minimal() + 
+  labs(title="Delovno aktivni v 2019", x="Število v 1000", y = "Poklicna skupina") +
+  scale_fill_manual(values=c('skyblue1', 'plum3'))
 
 # Graf delovno aktivnih tehnikov in drugih strokovnih sodelavcev glede na spol
 graf_tehniki <- ggplot(filter(tabela_po_poklicni_skupini, poklicna_skupina == 'Tehniki in drugi strokovni sodelavci'), 
        aes(x=leto, y=stevilo, fill=spol)) + 
   geom_bar(stat='identity', position='dodge') + theme_minimal() + 
   labs(title="Delovno aktivni tehniki in drugi strokovni sodelavci", x="Leto", y = "Število v 1000") + 
-  coord_cartesian(ylim=c(50,90)) + scale_fill_discrete(name='Spol')
+  coord_cartesian(ylim=c(50,90)) + scale_fill_manual(values=c('skyblue1', 'plum3'))
 
 
 # Zemljevida
@@ -40,7 +41,7 @@ glede_na_povrsino <- inner_join(povrsina_regij, filter(tabela_po_statisticni_reg
   mutate(Število = (stevilo / povrsina))
 
 narisi_glede_na_povrsino <- tm_shape(merge(zemljevid, glede_na_povrsino, by.x='NAME_1', by.y='regija')) + 
-  tm_polygons('Število') + tm_layout(main.title = "Zemljevid števila delovno aktivnih na kvadratni kilometer") + 
+  tm_polygons('Število', palette = "Purples") + tm_layout(main.title = "Zemljevid števila delovno aktivnih na kvadratni kilometer") + 
   tm_text(text='NAME_1', size=0.6)
 
 glede_na_prebivalce <- inner_join(filter(prebivalstvo_regij, leto == 2019), filter(tabela_po_statisticni_regiji, leto == 2019),
@@ -48,7 +49,7 @@ glede_na_prebivalce <- inner_join(filter(prebivalstvo_regij, leto == 2019), filt
   mutate(Delež = ((stevilo * 100) / prebivalstvo))
 
 narisi_glede_na_prebivalce <- tm_shape(merge(zemljevid, glede_na_prebivalce, by.x='NAME_1', by.y='regija')) + 
-  tm_polygons('Delež') + tm_layout(main.title = "Zemljevid deleža delovno aktivnih glede na vse prebivalce") + 
+  tm_polygons('Delež', palette = "Purples") + tm_layout(main.title = "Zemljevid deleža delovno aktivnih glede na vse prebivalce") + 
   tm_text(text='NAME_1', size=0.6)
 
 

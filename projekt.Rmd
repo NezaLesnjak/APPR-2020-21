@@ -36,7 +36,7 @@ Analizirati želim, kako se skozi leta spreminja število delovno aktivnih glede
 source("uvoz/uvoz.r", encoding="UTF-8")
 ```
 
-Uvozila smo podatke o številu delovno aktivnih glede na izobrazbo, delovno skupino oziroma statistično regijo - v obliki CSV s statističnega urada ter podatke o površini regij v obliki HTML
+Uvozila sem podatke o številu delovno aktivnih glede na izobrazbo, delovno skupino oziroma statistično regijo - v obliki CSV s statističnega urada ter podatke o površini regij v obliki HTML
 z Wikipedije. 
 
 Glavne poklicne skupine so:  
@@ -81,14 +81,13 @@ Poleg treh tabel s podatki o delovno aktivnih pa imamo tudi dve tabeli s podatki
 
 1. `površina regij` - podatki o velikosti statističnih regij
   - `regija` - spremenljivka: ena izmed dvanajstih statističnih regij (besedilo),
-  - `povrsina` - meritev: vrlikost regije v km^2^.
+  - `povrsina` - meritev: velikost regije v km^2^.
   
 2. `prebivalstvo regij` - podatki o številu prebivalcev po regijah za leta 2008 do 2019
   - `regija` - spremenljivka: ena izmed dvanajstih statističnih regij (besedilo),
   - `leto` - spremenljivka: leto, na katero se nanašajo podatki (število od 2008 do 2019),
   - `stevilo` - meritev: število prebivalcev regije v določenem letu (število).
 
-Spodnja grafa prikazujeta število delovno aktivnih moških oziroma žensk glede na njihovo stopnjo izobrazbe.
 
 ***
 
@@ -103,12 +102,12 @@ graf_izobrazba.moski
 ```
 
 Prvi graf prikazuje število delovno aktivnih moških glede na njihovo izobrazbo od leta 2008 do 2019.
-Ravni izobrazbe so razdeljene v pet glavnih skupin.
+Ravni izobrazbe so razdeljene v pet glavnih skupin, ki so naštete zgoraj.
 Kot sem si upala pričakovati je najmanjše število tistih, ki so brez izobrazbe oziroma imajo nepopolno osnovnošolsko izobrazbo. V zadnjih letih je število slednjih padlo na 1000.
 Nasprotje temu pa so moški s srednjo strokovno ali splošno izobrazbo - teh je namreč od leta 2009 dalje po številu največ.
 V preteklem letu jih je bilo kar 195 000. 
-Skoraj skozi celotno časovno obdobje, za katerega imamo podatke, pada število delovno aktivnih, ki spadajo v prve tri skupine po stopnjah izobrazbe. Torej pada število delovno aktivnih moških brez izobrazbe, z osnovnošolsko izobrazbo in nižjo ali srednjo poklicno izobrazbo.
-Poleg velikega padca števila tistih s srednje poklicno izobrazbo (iz kar 183 000 na 138 000), se je obratna sprememba zgodila pri višje in visokošolsko izobraženih - število je iz 103 000 narastlo kar na 155 000.
+Skoraj skozi celotno omenjeno časovno obdobje pada število delovno aktivnih, ki spadajo v prve tri skupine po stopnjah izobrazbe. Torej pada število delovno aktivnih moških brez izobrazbe, z osnovnošolsko izobrazbo in nižjo ali srednjo poklicno izobrazbo.
+Poleg velikega padca števila tistih s srednjo poklicno izobrazbo (iz kar 183 000 na 138 000), se je obratna sprememba zgodila pri višje in visokošolsko izobraženih - število je iz 103 000 narastlo kar na 155 000.
 
 ```{r izobrazba ženske, fig.align='center', fig.cap='Delovno aktivne ženske glede na izobrazbo'}
 graf_izobrazba.zenske
@@ -117,9 +116,10 @@ graf_izobrazba.zenske
 Zgornji graf prikazuje podobne podatke kot prvi, le da gre v tem primeru za delovno aktivne ženske.
 Tudi za žensko populacijo velja, da je skozi predstavljeno časovno obdobje padlo število tistih brez izobrazbe, z nepopolno ali popolno osnovnošolsko izobrazbo.
 Zanimivo pa je, da se podatki v naslednjih treh skupinah očitno razlikujejo od prejšnjih podatkov, vezanih na moške.
-Razlika med spoloma je očitna predvsem pri nižji ali srednji poklicni izobrazbi. Medtem ko se ta pri moških giblje med veliko višjimi števili, pri ženskah zavzema vrednosti med 84 000 in 61 000.
-Dve glavni skupini, ki predstavljata tiste z najvišjo ravnijo izobrazbe predstavljata tudi največje število delovno aktivnih žensk.  
-Med leti 2008 in 2011 je največje število delovno aktivnih žensk s srednjo strokovno ali splošno izobrazbo, od 2012 dalje pa največje vrednosti zavzema število višje in visokoizobraženih - slednje je naraščalo skozi vsa leta (iz 135 000 na kar 203 000 delovno aktivnih žensk).
+Razlika med spoloma je očitna predvsem pri nižji ali srednji poklicni izobrazbi.
+Medtem ko se ta pri moških giblje med veliko višjimi števili, pri ženskah zavzema vrednosti med 84 000 in 61 000.  
+Dve glavni skupini, ki predstavljata tiste z najvišjo ravnijo izobrazbe predstavljata tudi največje število delovno aktivnih žensk.
+Med leti 2008 in 2011 je največje število delovno aktivnih žensk s srednjo strokovno ali splošno izobrazbo, od 2012 dalje pa največje vrednosti zavzema število višje in visoko izobraženih - slednje je naraščalo skozi vsa leta (iz 135 000 na kar 203 000 delovno aktivnih žensk).
 
 ```{r poklicna skupina, fig.align='center', fig.cap='Delovno aktivni v letu 2019 glede na poklicno skupino in spol'}
 graf_poklicna_skupina.2019
@@ -153,7 +153,7 @@ narisi_glede_na_povrsino
 Zemljevid prikazuje število delovno aktivnih na kvadratni kilometer regije v letu 2019.
 Osrednjeslovenska regija ima daleč največje število - kar 105 delovno aktivnih na kvadratni kilometer.
 S skoraj 60-imi ji sledi šele podravska statistična regija.
-Regija z najredkejšim številom delovno aktivnih je notranjsko-kraška (s 16 delovno aktivnimi osebami na kvadratni kilometer).
+Regija z najredkejšim številom delovno aktivnih je notranjsko-kraška - s 16 delovno aktivnimi osebami na kvadratni kilometer.
 
 ```{r prebivalci, fig.align='center', fig.cap='Zemljevid deleža delovno aktivnih glede na število vseh prebivalcev'}
 narisi_glede_na_prebivalce
