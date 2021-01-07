@@ -97,7 +97,7 @@ Poleg treh tabel s podatki o delovno aktivnih pa imamo tudi dve tabeli s podatki
 source("vizualizacija/vizualizacija.r", encoding="UTF-8")
 ```
 
-```{r izobrazba moški, fig.align='center', fig.cap='Delovno aktivni moški glede na izobrazbo'}
+```{r izobrazbaMOŠKI, fig.align='center', fig.cap='Delovno aktivni moški glede na izobrazbo'}
 graf_izobrazba.moski
 ```
 
@@ -109,7 +109,7 @@ V preteklem letu jih je bilo kar 195 000.
 Skoraj skozi celotno omenjeno časovno obdobje pada število delovno aktivnih, ki spadajo v prve tri skupine po stopnjah izobrazbe. Torej pada število delovno aktivnih moških brez izobrazbe, z osnovnošolsko izobrazbo in nižjo ali srednjo poklicno izobrazbo.
 Poleg velikega padca števila tistih s srednjo poklicno izobrazbo (iz kar 183 000 na 138 000), se je obratna sprememba zgodila pri višje in visokošolsko izobraženih - število je iz 103 000 narastlo kar na 155 000.
 
-```{r izobrazba ženske, fig.align='center', fig.cap='Delovno aktivne ženske glede na izobrazbo'}
+```{r izobrazbaŽENSKE, fig.align='center', fig.cap='Delovno aktivne ženske glede na izobrazbo'}
 graf_izobrazba.zenske
 ```
 
@@ -121,7 +121,7 @@ Medtem ko se ta pri moških giblje med veliko višjimi števili, pri ženskah za
 Dve glavni skupini, ki predstavljata tiste z najvišjo ravnijo izobrazbe predstavljata tudi največje število delovno aktivnih žensk.
 Med leti 2008 in 2011 je največje število delovno aktivnih žensk s srednjo strokovno ali splošno izobrazbo, od 2012 dalje pa največje vrednosti zavzema število višje in visoko izobraženih - slednje je naraščalo skozi vsa leta (iz 135 000 na kar 203 000 delovno aktivnih žensk).
 
-```{r poklicna skupina, fig.align='center', fig.cap='Delovno aktivni v letu 2019 glede na poklicno skupino in spol'}
+```{r poklicnaSkupina, fig.align='center', fig.cap='Delovno aktivni v letu 2019 glede na poklicno skupino in spol'}
 graf_poklicna_skupina.2019
 ```
 
