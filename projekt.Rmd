@@ -7,7 +7,6 @@ output:
     includes:
       in_header: lib/styles.sty
     latex_engine: xelatex
-runtime: shiny
 ---
 
 ```{r setup, echo=FALSE, results='hide', message=FALSE, warning=FALSE}
@@ -165,6 +164,8 @@ Po najmanjšem deležu izstopajo statistične regije na (skrajnem) severovzhodu 
 
 ***
 
+<!---
+
 # Napredna analiza podatkov
 
 ```{r analiza}
@@ -183,8 +184,4 @@ ggplot(inner_join(obcine, data.frame(obcina=names(skupine),
          size=guide_legend(title="Prebivalci (* 1000)"))
 ```
 
-***
-
-```{r shiny}
-shinyAppDir("shiny", options=list(width="100%", height=600))
-```
+-->
