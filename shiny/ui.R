@@ -1,17 +1,8 @@
 library(shiny)
 
-shinyUI(fluidPage(
-  
-  titlePanel("Slovenske občine"),
-  
-  tabsetPanel(
-      tabPanel("Velikost družine",
-               DT::dataTableOutput("druzine")),
-      
-      tabPanel("Število naselij",
-               sidebarPanel(
-                  uiOutput("pokrajine")
-                ),
-               mainPanel(plotOutput("naselja")))
-    )
-))
+fluidPage(
+  selectInput(inputId = 'poklicna_skupina', label = 'Izberite poklicno skupino:',
+              choices = unique(tabela_po_poklicni_skupini$poklicna_skupina), 
+              selected = unique(tabela_po_poklicni_skupini$poklicna_skupina)[1]),
+  plotOutput('skupine')
+)

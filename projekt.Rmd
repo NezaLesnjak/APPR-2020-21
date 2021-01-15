@@ -7,6 +7,7 @@ output:
     includes:
       in_header: lib/styles.sty
     latex_engine: xelatex
+runtime: shiny
 ---
 
 ```{r setup, echo=FALSE, results='hide', message=FALSE, warning=FALSE}
@@ -96,7 +97,7 @@ Poleg treh tabel s podatki o delovno aktivnih pa imamo tudi dve tabeli s podatki
 source("vizualizacija/vizualizacija.r", encoding="UTF-8")
 ```
 
-```{r izobrazbaMoski, fig.align='center', fig.cap='Delovno aktivni moški glede na izobrazbo'}
+```{r izobrazbaMoski, fig.align='center'}
 graf_izobrazba.moski
 ```
 
@@ -108,7 +109,7 @@ V preteklem letu jih je bilo kar 195 000.
 Skoraj skozi celotno omenjeno časovno obdobje pada število delovno aktivnih, ki spadajo v prve tri skupine po stopnjah izobrazbe. Torej pada število delovno aktivnih moških brez izobrazbe, z osnovnošolsko izobrazbo in nižjo ali srednjo poklicno izobrazbo.
 Poleg velikega padca števila tistih s srednjo poklicno izobrazbo (iz kar 183 000 na 138 000), se je obratna sprememba zgodila pri višje in visokošolsko izobraženih - število je iz 103 000 narastlo kar na 155 000.
 
-```{r izobrazbaZenske, fig.align='center', fig.cap='Delovno aktivne ženske glede na izobrazbo'}
+```{r izobrazbaZenske, fig.align='center'}
 graf_izobrazba.zenske
 ```
 
@@ -120,7 +121,7 @@ Medtem ko se ta pri moških giblje med veliko višjimi števili, pri ženskah za
 Dve glavni skupini, ki predstavljata tiste z najvišjo ravnijo izobrazbe predstavljata tudi največje število delovno aktivnih žensk.
 Med leti 2008 in 2011 je največje število delovno aktivnih žensk s srednjo strokovno ali splošno izobrazbo, od 2012 dalje pa največje vrednosti zavzema število višje in visoko izobraženih - slednje je naraščalo skozi vsa leta (iz 135 000 na kar 203 000 delovno aktivnih žensk).
 
-```{r poklicnaSkupina, fig.align='center', fig.cap='Delovno aktivni v letu 2019 glede na poklicno skupino in spol'}
+```{r poklicnaSkupina, fig.align='center'}
 graf_poklicna_skupina.2019
 ```
 
@@ -134,7 +135,7 @@ Skupine poklicev, kjer je razlika med spoloma v številu manjša od 15 000 so:
 - tehniki in drugi strokovni sodelavci in  
 - kmetovalci, gozdarji, ribiči.
 
-```{r tehniki, fig.align='center', fig.cap='Delovno aktivni tehniki glede na spol'}
+```{r tehniki, fig.align='center'}
 graf_tehniki
 ```
 
@@ -142,10 +143,11 @@ Ko sem analizirala podatke o delovno aktivnih glede na poklicno skupino, se mi j
 V letih do 2011 je veljalo, da je v tej poklicni skupini večje število žensk kot moških, po tem letu pa velja ravno obratno.
 Zanimivo je tudi, da je po letu 2010 močno padlo število delovno aktivnih v tej skupini - pri obeh spolih. Zanimivo bi bilo vedeti, kolikšen vpliv je imela na ta padec kriza, ki se je dogajala v tistem obdobju.
 Padanje števila se je v naslednjih nekaj letih še nadaljevalo in leta 2015 je bilo v tej skupini skupaj zaposlenih le 109 000 ljudi (za primerjavo: v letu 2010 jih je bilo 154 000). 
-Po letu 2015 je število sicer zopet narastlo, a ne do te mere, da bi ga lahko enačili s številom pred krizo. 
+Po letu 2015 je število sicer zopet narastlo, a ne do te mere, da bi ga lahko enačili s številom pred krizo.  
+Grafi za ostale poklicne skupine so na koncu poročila.
 
 
-```{r povrsina, fig.align='center', fig.cap='Zemljevid števila delovno aktivnih na kvadratni kilometer'}
+```{r povrsina, fig.align='center'}
 narisi_glede_na_povrsino
 ```
 
@@ -154,7 +156,7 @@ Osrednjeslovenska regija ima daleč največje število - kar 105 delovno aktivni
 S skoraj 60-imi ji sledi šele podravska statistična regija.
 Regija z najredkejšim številom delovno aktivnih je notranjsko-kraška - s 16 delovno aktivnimi osebami na kvadratni kilometer.
 
-```{r prebivalci, fig.align='center', fig.cap='Zemljevid deleža delovno aktivnih glede na število vseh prebivalcev'}
+```{r prebivalci, fig.align='center'}
 narisi_glede_na_prebivalce
 ```
 
@@ -164,7 +166,7 @@ Po najmanjšem deležu izstopajo statistične regije na (skrajnem) severovzhodu 
 
 ***
 
-<!---
+
 
 # Napredna analiza podatkov
 
@@ -172,16 +174,22 @@ Po najmanjšem deležu izstopajo statistične regije na (skrajnem) severovzhodu 
 source("analiza/analiza.r", encoding="UTF-8")
 ```
 
-Spodnji graf prikazuje povezavo med številom naselij in površino občine.
+Spodnja dva grafa predstavljata napoved števila delovno aktivnih z visoko ali višješolsko izobrazbo. 
+Napoved je ločena za spola in vidimo lahko, da je v letu 2022 pričakovati preko 165 000 delovno aktivnih moških in
+okoli 220 000 žensk.  
+Seveda napovedi ne vklučujeta različnih zunanjih vplivov, zato se nanju ne moremo popolnoma zanesti.
 
-```{r graf, fig.align='center', fig.cap='Povezava med številom naselij in površino občine'}
-ggplot(inner_join(obcine, data.frame(obcina=names(skupine),
-                                     skupina=factor(skupine)), by="obcina")
-, aes(x=povrsina, y=naselja, color=skupina, size=prebivalci/1000)) + geom_point() +
-  ggtitle("Število naselij glede na površino občine") +
-  xlab(expression("Površina (km"^2 * ")")) + ylab("Št. naselij") +
-  guides(color=guide_legend(title="Skupina"),
-         size=guide_legend(title="Prebivalci (* 1000)"))
+```{r napoved_moski, fig.align='center'}
+graf_napovedi_visokoizobrazeni.moski
 ```
 
--->
+```{r napoved_zenske, fig.align='center'}
+graf_napovedi_visokoizobrazene.zenske
+```
+
+V spodnjem grafičnem prikazu pa je predstavljeno število delovno aktivnih - glede na spol - v posamezni poklicni skupini, ki jo bralec izbere sam.
+
+```{r shiny}
+shinyAppDir("shiny", options=list(width="100%", height=600))
+```
+
