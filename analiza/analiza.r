@@ -1,5 +1,7 @@
 # 4. faza: Analiza podatkov
 
+l <- data.frame(leto=c(2020, 2021, 2022))
+
 # Graf za napoved števila delovno aktivnih moških z visokošolsko ali višješolsko izobrazbo
 
 visokoizobrazeni_moski <- tabela_po_izobrazbi %>% filter(izobrazba == 'Višješolska, visokošolska') %>%
@@ -7,7 +9,6 @@ visokoizobrazeni_moski <- tabela_po_izobrazbi %>% filter(izobrazba == 'Višješo
 visokoizobrazeni_moski$leto = as.numeric(as.character(visokoizobrazeni_moski$leto))
 
 model_visokoizobrazeni.moski <- lm(stevilo ~ leto, data=visokoizobrazeni_moski)
-l <- data.frame(leto=c(2020, 2021, 2022))
 napoved_moski <- mutate(l, stevilo=predict(model_visokoizobrazeni.moski,l))
 
 graf_napovedi_visokoizobrazeni.moski <- ggplot(visokoizobrazeni_moski, aes(x=leto, y=stevilo)) +

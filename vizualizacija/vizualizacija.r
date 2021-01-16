@@ -1,6 +1,5 @@
 # 3. faza: Vizualizacija podatkov
 
-
 # Graf delovno aktivnih moških glede na izobrazbo
 graf_izobrazba.moski <- ggplot(filter(tabela_po_izobrazbi, spol == 'Moški'), 
                           aes(x=leto, y=stevilo, col=izobrazba)) + geom_point(size=3) + 
@@ -24,7 +23,6 @@ graf_tehniki <- ggplot(filter(tabela_po_poklicni_skupini, poklicna_skupina == 'T
   labs(title="Delovno aktivni tehniki in drugi strokovni sodelavci", x="Leto", y = "Število v 1000") + 
   coord_cartesian(ylim=c(50,90)) + scale_fill_manual(values=c('skyblue1', 'plum3'))
 
-
 # Zemljevida
 
 zemljevid <- uvozi.zemljevid("https://biogeo.ucdavis.edu/data/gadm3.6/shp/gadm36_SVN_shp.zip", 
@@ -41,7 +39,7 @@ glede_na_povrsino <- inner_join(povrsina_regij, filter(tabela_po_statisticni_reg
   mutate(Število = (stevilo / povrsina))
 
 narisi_glede_na_povrsino <- tm_shape(merge(zemljevid, glede_na_povrsino, by.x='NAME_1', by.y='regija')) + 
-  tm_polygons('Število', palette = "Purples") + tm_layout(main.title = "Zemljevid števila delovno aktivnih na kvadratni kilometer") + 
+  tm_polygons('Število', palette = "Purples") + tm_layout(main.title = "Zemljevid števila delovno aktivnih \nna kvadratni kilometer regije") + 
   tm_text(text='NAME_1', size=0.6)
 
 glede_na_prebivalce <- inner_join(filter(prebivalstvo_regij, leto == 2019), filter(tabela_po_statisticni_regiji, leto == 2019),
@@ -49,20 +47,5 @@ glede_na_prebivalce <- inner_join(filter(prebivalstvo_regij, leto == 2019), filt
   mutate(Delež = ((stevilo * 100) / prebivalstvo))
 
 narisi_glede_na_prebivalce <- tm_shape(merge(zemljevid, glede_na_prebivalce, by.x='NAME_1', by.y='regija')) + 
-  tm_polygons('Delež', palette = "Purples") + tm_layout(main.title = "Zemljevid deleža delovno aktivnih glede na vse prebivalce") + 
+  tm_polygons('Delež', palette = "Purples") + tm_layout(main.title = "Zemljevid deleža delovno aktivnih \nglede na število vseh prebivalcev regije") + 
   tm_text(text='NAME_1', size=0.6)
-
-
-# Uvozimo zemljevid.
-zemljevid <- uvozi.zemljevid("http://baza.fmf.uni-lj.si/OB.zip", "OB",
-                             pot.zemljevida="OB", encoding="Windows-1250")
-# Če zemljevid nima nastavljene projekcije, jo ročno določimo
-proj4string(zemljevid) <- CRS("+proj=utm +zone=10+datum=WGS84")
-
-levels(zemljevid$OB_UIME) <- levels(zemljevid$OB_UIME) %>%
-  { gsub("Slovenskih", "Slov.", .) } %>% { gsub("-", " - ", .) }
-zemljevid$OB_UIME <- factor(zemljevid$OB_UIME, levels=levels(obcine$obcina))
-
-# Izračunamo povprečno velikost družine
-povprecja <- druzine %>% group_by(obcina) %>%
-  summarise(povprecje=sum(velikost.druzine * stevilo.druzin) / sum(stevilo.druzin))
