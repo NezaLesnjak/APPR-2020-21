@@ -88,7 +88,6 @@ Poleg treh tabel s podatki o delovno aktivnih pa imamo tudi dve tabeli s podatki
   - `leto` - spremenljivka: leto, na katero se nanašajo podatki (število od 2008 do 2019),
   - `stevilo` - meritev: število prebivalcev regije v določenem letu (število).
 
-
 ***
 
 # Analiza in vizualizacija podatkov
@@ -146,7 +145,6 @@ Padanje števila se je v naslednjih nekaj letih še nadaljevalo in leta 2015 je 
 Po letu 2015 je število sicer zopet narastlo, a ne do te mere, da bi ga lahko enačili s številom pred krizo.  
 Grafi za ostale poklicne skupine so na koncu poročila.
 
-
 ```{r povrsina, fig.align='center'}
 narisi_glede_na_povrsino
 ```
@@ -163,10 +161,7 @@ narisi_glede_na_prebivalce
 Zgornji zemljevid pa prikazuje, kolikšen delež vseh prebivalcev regije predstavljajo delovno aktivni v letu 2019.
 Po najmanjšem deležu izstopajo statistične regije na (skrajnem) severovzhodu države (med 36% in 41%). Ravno obratno pa velja za gorenjsko, notranjsko-kraško, osrednjeslovensko in jugovzhodno Slovenijo - te regije imajo delež zelo blizu 45%.
 
-
 ***
-
-
 
 # Napredna analiza podatkov
 
@@ -179,13 +174,12 @@ Napoved je ločena za spola in vidimo lahko, da je v letu 2022 pričakovati prek
 okoli 220 000 žensk.  
 Seveda napovedi ne vklučujeta različnih zunanjih vplivov, zato se nanju ne moremo popolnoma zanesti.
 
-```{r napoved_moski, fig.align='center'}
+```{r, napovedi, fig.show="hold", out.width="50%"}
 graf_napovedi_visokoizobrazeni.moski
-```
-
-```{r napoved_zenske, fig.align='center'}
 graf_napovedi_visokoizobrazene.zenske
 ```
+
+### Shiny
 
 V spodnjem grafičnem prikazu pa je predstavljeno število delovno aktivnih - glede na spol - v posamezni poklicni skupini, ki jo bralec izbere sam.
 
