@@ -3,12 +3,14 @@
 # Graf delovno aktivnih moških glede na izobrazbo
 graf_izobrazba.moski <- ggplot(filter(tabela_po_izobrazbi, spol == 'Moški'), 
                           aes(x=leto, y=stevilo, col=izobrazba)) + geom_point(size=3) + 
-  ggtitle("Delovno aktivni moški glede na izobrazbo") + ylab("Število v 1000") + theme_minimal()
+  ggtitle("Delovno aktivni moški glede na izobrazbo") + ylab("Število v 1000") + theme_minimal() + 
+  theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1))
 
 # Graf delovno aktivnih žensk glede na izobrazbo
 graf_izobrazba.zenske <- ggplot(filter(tabela_po_izobrazbi, spol == 'Ženske'), 
                            aes(x=leto, y=stevilo, col=izobrazba)) + geom_point(size=3) +
-  ggtitle("Delovno aktivne ženske glede na izobrazbo") + ylab("Število v 1000") + theme_minimal()
+  ggtitle("Delovno aktivne ženske glede na izobrazbo") + ylab("Število v 1000") + theme_minimal() + 
+  theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1))
 
 # Graf delovno aktivnih v letu 2019 glede na poklicno skupino in spol
 graf_poklicna_skupina.2019 <- ggplot(filter(tabela_po_poklicni_skupini, leto == 2019), aes(x=stevilo, y=poklicna_skupina, fill=spol)) + 
